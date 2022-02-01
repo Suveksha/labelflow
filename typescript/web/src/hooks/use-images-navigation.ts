@@ -6,7 +6,7 @@ import {
 } from "../graphql-types/GetAllImagesOfADatasetQuery";
 import { useDatasetImage } from "./use-dataset-image";
 
-const GET_ALL_IMAGES_OF_A_DATASET_QUERY = gql`
+export const GET_ALL_IMAGES_OF_A_DATASET_QUERY = gql`
   query GetAllImagesOfADatasetQuery($slug: String!, $workspaceSlug: String!) {
     dataset(where: { slugs: { slug: $slug, workspaceSlug: $workspaceSlug } }) {
       id

@@ -1,3 +1,4 @@
+import { SetRequired } from "type-fest";
 import {
   Dataset,
   LabelClass,
@@ -12,10 +13,14 @@ export type WorkspaceData = Pick<Workspace, "slug">;
 
 export type DatasetData = Pick<Dataset, "id" | "name" | "slug"> & {
   labelClasses: Omit<LabelClassData, "dataset">[];
+  images: Omit<ImageData, "dataset">[];
   workspace: WorkspaceData;
 };
 
-export type ImageData = Pick<Image, "id" | "name" | "url"> & {
+export type ImageData = SetRequired<
+  Pick<Image, "id" | "name" | "url" | "thumbnail200Url">,
+  "thumbnail200Url"
+> & {
   dataset: DatasetData;
 };
 
@@ -42,6 +47,46 @@ export const BASIC_DATASET_DATA: DatasetData = {
   slug: "my-test-dataset",
   workspace: BASIC_WORKSPACE_DATA,
   labelClasses: [],
+  images: [
+    {
+      id: "cae07de6-8054-11ec-9c81-fb4047302868",
+      name: "My Test Image",
+      url: "https://localhost:3000/api/downloads/8f47e891-3b24-427a-8db0-dab362fbe269/cae07de6-8054-11ec-9c81-fb4047302868.jpg/original.jpeg",
+      thumbnail200Url:
+        "https://localhost:3000/api/downloads/8f47e891-3b24-427a-8db0-dab362fbe269/cae07de6-8054-11ec-9c81-fb4047302868.jpg/t200.jpeg",
+    },
+  ],
+};
+
+export const DEEP_DATASET_WITH_IMAGES_DATA: DatasetData = {
+  id: "4a672daa-8382-11ec-bf5d-d3ead45bcfd4",
+  name: "My Test Dataset With Images",
+  slug: "my-test-dataset-with-images",
+  workspace: BASIC_WORKSPACE_DATA,
+  labelClasses: [],
+  images: [
+    {
+      id: "9b8fb142-8388-11ec-a8ee-f7dcb0508f86",
+      name: "My Test Image 1",
+      url: "https://localhost:3000/api/downloads/8f47e891-3b24-427a-8db0-dab362fbe269/9b8fb142-8388-11ec-a8ee-f7dcb0508f86.jpg/original.jpeg",
+      thumbnail200Url:
+        "https://localhost:3000/api/downloads/8f47e891-3b24-427a-8db0-dab362fbe269/9b8fb142-8388-11ec-a8ee-f7dcb0508f86.jpg/t200.jpeg",
+    },
+    {
+      id: "a552037e-8388-11ec-965b-07327355c580",
+      name: "My Test Image 2",
+      url: "https://localhost:3000/api/downloads/8f47e891-3b24-427a-8db0-dab362fbe269/a552037e-8388-11ec-965b-07327355c580.jpg/original.jpeg",
+      thumbnail200Url:
+        "https://localhost:3000/api/downloads/8f47e891-3b24-427a-8db0-dab362fbe269/a552037e-8388-11ec-965b-07327355c580.jpg/t200.jpeg",
+    },
+    {
+      id: "b54692ea-8388-11ec-9d20-f35e7c62c93f",
+      name: "My Test Image 3",
+      url: "https://localhost:3000/api/downloads/8f47e891-3b24-427a-8db0-dab362fbe269/b54692ea-8388-11ec-9d20-f35e7c62c93f.jpg/original.jpeg",
+      thumbnail200Url:
+        "https://localhost:3000/api/downloads/8f47e891-3b24-427a-8db0-dab362fbe269/b54692ea-8388-11ec-9d20-f35e7c62c93f.jpg/t200.jpeg",
+    },
+  ],
 };
 
 export const DEEP_DATASET_WITH_CLASSES_DATA: DatasetData = {
@@ -81,12 +126,11 @@ export const DEEP_DATASET_WITH_CLASSES_DATA: DatasetData = {
       },
     },
   ],
+  images: [],
 };
 
 export const BASIC_IMAGE_DATA: ImageData = {
-  id: "cae07de6-8054-11ec-9c81-fb4047302868",
-  name: "My Test Image",
-  url: "https://localhost:3000/api/downloads/8f47e891-3b24-427a-8db0-dab362fbe269/cae07de6-8054-11ec-9c81-fb4047302868",
+  ...BASIC_DATASET_DATA.images[0],
   dataset: BASIC_DATASET_DATA,
 };
 
