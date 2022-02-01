@@ -3,13 +3,20 @@ import {
   LabelClass,
   LabelsAggregates,
   Workspace,
+  Image,
+  Label,
 } from "@labelflow/graphql-types";
+import { LabelType } from "../../graphql-types/globalTypes";
 
 export type WorkspaceData = Pick<Workspace, "slug">;
 
 export type DatasetData = Pick<Dataset, "id" | "name" | "slug"> & {
   labelClasses: Omit<LabelClassData, "dataset">[];
   workspace: WorkspaceData;
+};
+
+export type ImageData = Pick<Image, "id" | "name" | "url"> & {
+  dataset: DatasetData;
 };
 
 export type LabelClassData = Pick<
@@ -19,6 +26,10 @@ export type LabelClassData = Pick<
   shortcut: string;
   dataset: DatasetData;
   labelsAggregates: LabelsAggregates;
+};
+
+export type LabelData = Pick<Label, "id" | "type" | "imageId"> & {
+  labelClass: LabelClassData;
 };
 
 export const BASIC_WORKSPACE_DATA: WorkspaceData = {
@@ -72,7 +83,21 @@ export const DEEP_DATASET_WITH_CLASSES_DATA: DatasetData = {
   ],
 };
 
+export const BASIC_IMAGE_DATA: ImageData = {
+  id: "cae07de6-8054-11ec-9c81-fb4047302868",
+  name: "My Test Image",
+  url: "https://localhost:3000/api/downloads/8f47e891-3b24-427a-8db0-dab362fbe269/cae07de6-8054-11ec-9c81-fb4047302868",
+  dataset: BASIC_DATASET_DATA,
+};
+
 export const BASIC_LABEL_CLASS_DATA: LabelClassData = {
   ...DEEP_DATASET_WITH_CLASSES_DATA.labelClasses[0],
   dataset: DEEP_DATASET_WITH_CLASSES_DATA,
+};
+
+export const BASIC_LABEL_DATA: LabelData = {
+  id: "87a60aa2-8057-11ec-80be-5f791a5254d5",
+  type: LabelType.Box,
+  labelClass: BASIC_LABEL_CLASS_DATA,
+  imageId: BASIC_IMAGE_DATA.id,
 };
