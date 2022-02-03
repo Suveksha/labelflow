@@ -15,7 +15,7 @@ import {
   CREATE_LABEL_CLASS_ACTION_MOCK,
   UPDATE_LABEL_CLASS_ACTION_MOCK,
   UPDATE_LABEL_CLASS_OF_LABEL_MOCK,
-} from "../options-tool-bar.fixtures";
+} from "../../edit-label-class.fixtures";
 
 import { mockMatchMedia } from "../../../../utils/mock-window";
 
@@ -47,7 +47,6 @@ beforeEach(() => {
       selectedTool: Tools.SELECTION,
     })
   );
-
   jest.clearAllMocks();
 });
 
@@ -55,12 +54,11 @@ it("should create a class", async () => {
   const mockLink = getApolloMockLink(APOLLO_MOCKS);
   renderEditLabelClassMenu(mockLink);
   act(() =>
-    userEvent.type(screen.getByPlaceholderText(/Search/), "newClassTest{enter}")
+    userEvent.type(screen.getByPlaceholderText(/Search/), "newClassTest")
   );
   await waitFor(() => expect(screen.getByText("Create class")).toBeDefined());
   userEvent.click(screen.getByText("Create class"));
   await act(() => mockLink.waitForAllResponsesRecursively());
-
   expect(CREATE_LABEL_CLASS_ACTION_MOCK.result).toHaveBeenCalled();
   expect(UPDATE_LABEL_CLASS_ACTION_MOCK.result).toHaveBeenCalled();
 });

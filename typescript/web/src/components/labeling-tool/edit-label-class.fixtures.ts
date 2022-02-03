@@ -5,49 +5,49 @@ import {
   CREATE_LABEL_CLASS_QUERY,
   GET_LABEL_QUERY,
   UPDATE_LABEL_MUTATION as UPDATE_LABEL_MUTATION_SHARED,
-} from "../../../connectors/undo-store/effects/shared-queries";
-import { UPDATE_LABEL_MUTATION } from "../../../connectors/undo-store/effects/update-label-class-of-label";
+} from "../../connectors/undo-store/effects/shared-queries";
+import { UPDATE_LABEL_MUTATION } from "../../connectors/undo-store/effects/update-label-class-of-label";
 import {
   CreateLabelClassActionMutation,
   CreateLabelClassActionMutationVariables,
-} from "../../../graphql-types/CreateLabelClassActionMutation";
+} from "../../graphql-types/CreateLabelClassActionMutation";
 import {
   GetLabelClassesOfDatasetQuery,
   GetLabelClassesOfDatasetQueryVariables,
-} from "../../../graphql-types/GetLabelClassesOfDatasetQuery";
+} from "../../graphql-types/GetLabelClassesOfDatasetQuery";
 import {
   GetLabelClassQuery,
   GetLabelClassQueryVariables,
-} from "../../../graphql-types/GetLabelClassQuery";
+} from "../../graphql-types/GetLabelClassQuery";
 import {
   GetLabelIdAndClassIdQuery,
   GetLabelIdAndClassIdQueryVariables,
-} from "../../../graphql-types/GetLabelIdAndClassIdQuery";
+} from "../../graphql-types/GetLabelIdAndClassIdQuery";
 import {
   GetLabelWithLabelClassQuery,
   GetLabelWithLabelClassQueryVariables,
-} from "../../../graphql-types/GetLabelWithLabelClassQuery";
+} from "../../graphql-types/GetLabelWithLabelClassQuery";
 import {
   UpdateLabelClassActionMutation,
   UpdateLabelClassActionMutationVariables,
-} from "../../../graphql-types/UpdateLabelClassActionMutation";
+} from "../../graphql-types/UpdateLabelClassActionMutation";
 import {
   UpdateLabelClassOfLabelMutation,
   UpdateLabelClassOfLabelMutationVariables,
-} from "../../../graphql-types/UpdateLabelClassOfLabelMutation";
+} from "../../graphql-types/UpdateLabelClassOfLabelMutation";
 import {
   ApolloMockResponse,
   ApolloMockResponses,
-} from "../../../utils/tests/apollo-mock";
+} from "../../utils/tests/apollo-mock";
 import {
   BASIC_LABEL_DATA,
   DEEP_DATASET_WITH_CLASSES_DATA,
-} from "../../../utils/tests/data.fixtures";
+} from "../../utils/tests/data.fixtures";
 import {
   GET_LABEL_CLASSES_OF_DATASET_QUERY,
   GET_LABEL_QUERY as GET_LABEL_WITH_LABEL_CLASS_QUERY,
   labelClassQuery,
-} from "../openlayers-map/queries";
+} from "./openlayers-map/queries";
 
 export const GET_LABEL_CLASSES_OF_DATASET_MOCK: ApolloMockResponse<
   GetLabelClassesOfDatasetQuery,
