@@ -50,12 +50,17 @@ test("should display one when only one image in list", async () => {
 });
 
 const testNextPrevImage = (isTestNext: boolean) => async () => {
+  const workspaceSlug = DEEP_DATASET_WITH_IMAGES_DATA.workspace.slug;
+  const datasetSlug = DEEP_DATASET_WITH_IMAGES_DATA.slug;
+  const imageId = DEEP_DATASET_WITH_IMAGES_DATA.images[1].id;
+  const newImageId =
+    DEEP_DATASET_WITH_IMAGES_DATA.images[isTestNext ? 2 : 0].id;
   const mockedPush = jest.fn();
   (useRouter as jest.Mock).mockImplementation(() => ({
     query: {
-      imageId: DEEP_DATASET_WITH_IMAGES_DATA.images[1].id,
-      datasetSlug: DEEP_DATASET_WITH_IMAGES_DATA.slug,
-      workspaceSlug: DEEP_DATASET_WITH_IMAGES_DATA.workspace.slug,
+      imageId,
+      datasetSlug,
+      workspaceSlug,
     },
     push: mockedPush,
   }));
@@ -69,9 +74,7 @@ const testNextPrevImage = (isTestNext: boolean) => async () => {
   );
   userEvent.type(container, isTestNext ? "{arrowright}" : "{arrowleft}");
   expect(mockedPush).toHaveBeenCalledWith(
-    `/${DEEP_DATASET_WITH_IMAGES_DATA.workspace.slug}/datasets/${
-      DEEP_DATASET_WITH_IMAGES_DATA.slug
-    }/images/${DEEP_DATASET_WITH_IMAGES_DATA.images[isTestNext ? 2 : 0].id}`
+    `/${workspaceSlug}/datasets/${datasetSlug}/images/${newImageId}`
   );
 };
 
