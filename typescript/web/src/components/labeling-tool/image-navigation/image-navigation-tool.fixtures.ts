@@ -1,4 +1,4 @@
-import { pick } from "lodash";
+import { pick } from "lodash/fp";
 import { MATCH_ANY_PARAMETERS } from "wildcard-mock-link";
 import {
   GetAllImagesOfADatasetQuery,
@@ -34,7 +34,7 @@ export const GET_ALL_IMAGES_OF_A_DATASET_MOCK: ApolloMockResponse<
           ? {
               id: DATASET_SLUG_DATA[variables.slug].id,
               images: DATASET_SLUG_DATA[variables.slug].images.map((image) =>
-                pick(image, "id", "url", "thumbnail200Url")
+                pick(["id", "url", "thumbnail200Url"], image)
               ),
             }
           : {

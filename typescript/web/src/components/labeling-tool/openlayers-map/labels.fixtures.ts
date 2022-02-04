@@ -1,4 +1,4 @@
-import { pick } from "lodash";
+import { pick } from "lodash/fp";
 import { MATCH_ANY_PARAMETERS } from "wildcard-mock-link";
 import {
   GetImageLabelsQuery,
@@ -29,21 +29,23 @@ export const GET_IMAGE_LABELS_MOCK: ApolloMockResponse<
     return {
       data: {
         image: {
-          ...pick(imageData, "id", "width", "height"),
+          ...pick(["id", "width", "height"], imageData),
           labels: imageData.labels.map((labelData) => ({
             ...pick(
-              labelData,
-              "type",
-              "id",
-              "x",
-              "y",
-              "width",
-              "height",
-              "smartToolInput",
-              "geometry"
+              [
+                "type",
+                "id",
+                "x",
+                "y",
+                "width",
+                "height",
+                "smartToolInput",
+                "geometry",
+              ],
+              labelData
             ),
             labelClass: {
-              ...pick(labelData.labelClass, "id", "name", "color"),
+              ...pick(["id", "name", "color"], labelData.labelClass),
             },
           })),
         },
