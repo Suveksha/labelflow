@@ -56,20 +56,20 @@ export type ImageData = SetRequired<
 
 const BASIC_LABEL_GEOMETRY_PARTIAL = {
   type: LabelType.Box,
-  x: 10,
-  y: 20,
-  width: 30,
-  height: 40,
+  x: 100,
+  y: 200,
+  width: 100,
+  height: 100,
   smartToolInput: null,
   geometry: {
     type: "Polygon",
     coordinates: [
       [
-        [10, 20],
-        [40, 20],
-        [40, 60],
-        [10, 60],
-        [10, 20],
+        [100, 200],
+        [100, 300],
+        [200, 300],
+        [200, 200],
+        [100, 200],
       ],
     ],
   },
