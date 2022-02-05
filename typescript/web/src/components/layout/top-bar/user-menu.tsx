@@ -234,9 +234,9 @@ const UserMenuList = (props: UserProps) => {
           <MenuDivider />
         </>
       )}
-      <UserMenuGroup />
+      <PreferencesMenuGroup /> {/*changed*/}
       <MenuDivider />
-      <PreferencesMenuGroup />
+      <UserMenuGroup /> {/*changed*/}
     </MenuList>
   );
 };
